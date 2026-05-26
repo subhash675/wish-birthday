@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Jiya Jan! ❤️</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Playfair+Display:ital,wght@0,600;1,400&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            background-color: #0b0b0b;
+        }
+
+        /* Background Blurred Image with Gradient Fallback */
+        .bg-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(11, 11, 11, 0.6), rgba(11, 11, 11, 0.8)), url('IMG_20260526_151751.jpg'), no-repeat center center;
+            background-size: cover;
+            filter: blur(12px) brightness(0.45);
+            transform: scale(1.1);
+            z-index: -1;
+        }
+
+        /* Decorative Corners */
+        .corner-decor {
+            position: fixed;
+            font-size: 2rem;
+            opacity: 0.8;
+            z-index: 5;
+            pointer-events: none;
+            transition: all 1s ease;
+        }
+        .top-left { top: 20px; left: 20px; }
+        .top-right { top: 20px; right: 20px; }
+        .bottom-left { bottom: 20px; left: 20px; }
+        .bottom-right { bottom: 20px; right: 20px; }
+
+        /* Overlay Welcome Screen */
+        #overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(15, 15, 15, 0.98);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .open-btn {
+            padding: 16px 40px;
+            font-size: 1.25rem;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            color: #fff;
+            background: linear-gradient(45deg, #ff416c, #ff4b2b);
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 25px rgba(255, 65, 108, 0.5);
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: pulse 2s infinite;
+        }
+
+        .open-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 35px rgba(255, 65, 108, 0.8);
+        }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 24px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s cubic-bezier(0.4, 0, 0.2, 1), transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .main-container.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Premium Glassmorphism Card Setup */
+        .birthday-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 40px 30px;
+            border-radius: 24px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            max-width: 420px;
+            width: 100%;
+            position: relative;
+            animation: float 5s ease-in-out infinite;
+        }
+
+        /* Card Floating Hearts Decor */
+        .card-heart {
+            position: absolute;
+            color: #ff416c;
+            font-size: 1.5rem;
+            opacity: 0.6;
+            animation: pulse 2.5s infinite ease-in-out;
+        }
+        .ch-1 { top: -15px; left: 20px; }
+        .ch-2 { bottom: -15px; right: 20px; }
+
+        /* Image Styling with Alternative Asset Fallback */
+        .profile-img-container {
+            position: relative;
+            width: 180px;
+            height: 250px;
+            margin: 0 auto 25px auto;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            overflow: hidden;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+            transition: transform 0.5s ease;
+        }
+
+        .birthday-card:hover .profile-img {
+            transform: scale(1.03) rotate(1deg);
+        }
+
+        /* Typography */
+        h1 {
+            color: rgba(255,255,255,0.95);
+            font-size: 2rem;
+            font-weight: 400;
+            margin-bottom: 5px;
+            letter-spacing: 0.5px;
+            font-family: 'Playfair Display', serif;
+        }
+
+        .name {
+            background: linear-gradient(45deg, #ff9a9e, #fecfef, #fe9a8b);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.8rem;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 15px;
+            font-family: 'Playfair Display', serif;
+            letter-spacing: 1px;
+        }
+
+        p {
+            color: rgba(240, 240, 240, 0.85);
+            font-size: 1rem;
+            line-height: 1.6;
+            font-weight: 300;
+            margin-bottom: 25px;
+        }
+
+        /* Celebrate Cake Button */
+        .cake-btn {
+            background: linear-gradient(135deg, #ffd166, #f78da7);
+            border: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            color: #333;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 209, 102, 0.4);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cake-btn:hover {
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 209, 102, 0.6);
+            background: linear-gradient(135deg, #f78da7, #ffd166);
+        }
+
+        .cake-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Floating Confetti / Hearts Animation */
+        .particle {
+            position: fixed;
+            pointer-events: none;
+            z-index: 10;
+            top: -50px;
+            animation: fall linear forwards;
+        }
+
+        /* Keyframes */
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.1); opacity: 0.9; }
+            100% { transform: scale(1); opacity: 0.5; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+
+        @keyframes fall {
+            0% {
+                transform: translateY(0) rotate(0deg);
+                opacity: 0;
+            }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% {
+                transform: translateY(110vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes burstParticle {
+            0% { transform: translate(0, 0) scale(1); opacity: 1; }
+            100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 480px) {
+            .birthday-card { padding: 35px 20px; }
+            .name { font-size: 2.3rem; }
+            h1 { font-size: 1.75rem; }
+            .profile-img-container { width: 160px; height: 220px; }
+            .corner-decor { font-size: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-image"></div>
+
+    <div class="corner-decor top-left">🎈❤️</div>
+    <div class="corner-decor top-right">✨🎉</div>
+    <div class="corner-decor bottom-left">✨🎂</div>
+    <div class="corner-decor bottom-right">🎈💖</div>
+
+    <div id="overlay">
+        <button class="open-btn" onclick="celebrate()">👉 Click to Open Card ❤️</button>
+    </div>
+
+    <div class="main-container" id="mainContent">
+        <div class="birthday-card">
+            <div class="card-heart ch-1">💖</div>
+            <div class="card-heart ch-2">💝</div>
+
+            <div class="profile-img-container">
+                <img src="IMG_20260526_151751.jpg" alt="Jiya Jan" class="profile-img" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1513151233558-d860c5398176?w=500';">
+            </div>
+            <h1>Happy Birthday</h1>
+            <span class="name">Jiya Jan</span>
+            <p>Wishing you a beautiful day filled with love, laughter, and endless happiness. May all your dreams come true! ✨🎂</p>
+            
+            <button class="cake-btn" onclick="cakeBurst(event)">🎂 Celebrate & Blow Candles! ✨</button>
+        </div>
+    </div>
+
+    <audio id="birthdayAudio" loop>
+        <source src="https://dl.dropboxusercontent.com/scl/fi/g6skp0qof7p808c1lgh1c/Happy-Birthday-To-You-Instrumental.mp3?rlkey=2w0fbydoxmvy87uay49o32d20" type="audio/mp3">
+    </audio>
+
+    <script>
+        let streamParticles;
+
+        function celebrate() {
+            const overlay = document.getElementById('overlay');
+            overlay.style.opacity = '0';
+            setTimeout(() => overlay.style.display = 'none', 800);
+
+            document.getElementById('mainContent').classList.add('show');
+
+            const audio = document.getElementById('birthdayAudio');
+            audio.play().catch(error => console.log("Audio initialization playback handled safely:", error));
+
+            if (!streamParticles) {
+                streamParticles = setInterval(createParticle, 180);
+            }
+        }
+
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+           
+            const pool = ['❤️', '✨', '🎂', '💖', '🎈', '🎉'];
+            particle.innerHTML = pool[Math.floor(Math.random() * pool.length)];
+            
+            const size = Math.random() * 16 + 14;
+            particle.style.fontSize = size + 'px';
+            particle.style.left = Math.random() * 100 + 'vw';
+           
+            const duration = Math.random() * 4 + 4;
+            particle.style.animationDuration = duration + 's';
+
+            document.body.appendChild(particle);
+
+            setTimeout(() => {
+                particle.remove();
+            }, duration * 1000);
+        }
+
+        function cakeBurst(event) {
+            const btn = event.currentTarget;
+            const rect = btn.getBoundingClientRect();
+            
+            for (let i = 0; i < 20; i++) {
+                const p = document.createElement('div');
+                p.innerHTML = ['❤️', '🎂', '✨', '🎈', '🧁'][Math.floor(Math.random() * 5)];
+                p.style.position = 'fixed';
+                p.style.pointerEvents = 'none';
+                p.style.zIndex = '100';
+                p.style.left = (rect.left + rect.width / 2) + 'px';
+                p.style.top = (rect.top + rect.height / 2) + 'px';
+                p.style.fontSize = (Math.random() * 10 + 16) + 'px';
+                
+                const angle = Math.random() * Math.PI * 2;
+                const velocity = Math.random() * 120 + 60;
+                const x = Math.cos(angle) * velocity;
+                const y = Math.sin(angle) * velocity;
+                
+                p.style.setProperty('--x', `${x}px`);
+                p.style.setProperty('--y', `${y}px`);
+                p.style.animation = 'burstParticle 0.8s cubic-bezier(0.1, 0.8, 0.3, 1) forwards';
+                
+                document.body.appendChild(p);
+                setTimeout(() => p.remove(), 800);
+            }
+        }
+    </script>
+</body>
+</html>
